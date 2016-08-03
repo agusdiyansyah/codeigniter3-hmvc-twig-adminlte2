@@ -1,0 +1,37 @@
+Admin template dengan codeigniter 3, twig template engine dan AdminLTE
+
+class Xyz extends Markas
+
+MARKAS API
+$this->template($get = "admin")
+    fungsi ini digunakan untuk load library twig dan menentukan path utama dari template yang digunakan, secara default path akan di tujukan ke directory APPPATH/views/admin, namun dapat di ubah jika akan membuat webclient secara public
+
+$this->addPath($namespace, $customPath)
+    secara default twig akan merender template pada directory APPPATH/views/admin, fungsi ini digunakan jika ingin menambahkan directori template
+
+TWIG API
+$this->twig_base
+    variable yang digunakan untuk menentukan base_url() application
+
+$this->twig->extention
+    variable yang digunakan untuk menentukan extensi file yang akan di render menggunakan twig, extensi dapat di rubah dengan .twig, .tpl dll
+
+$this->twig->debug
+    twig debug
+
+$this->twig->cache
+    setting true false cache
+
+$this->twig->defaultParams
+    variable yang menyimpan parameter default sebuah website
+
+$this->twig->params
+    variable yang menampung parameter halaman, variable ini dapat digantukan dengan parameter params pada fungsi render, namun jika menggunakan variable ini dan juga mendevinisikan parameter params di render keduanya dapat digunakan secara bersamaan
+
+$this->twig->cache($bol)
+    setting cache twig | boolean
+
+$this->twig->addPath($path, $namespace)
+    fungsi yang digunakan untuk menambahkan directory template, fungsi ini akan menggunakan fungsi prependPath() pada twig loader, fungsi ini di gunakan untuk memproses hasil dari fungsi addPath() yang terdapat pada API MARKAS
+
+$this->twig->

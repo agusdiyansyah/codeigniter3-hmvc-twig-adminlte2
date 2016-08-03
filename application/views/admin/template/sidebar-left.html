@@ -28,7 +28,7 @@
                 {%for data in dataMenu%}
                     <li class="header">{{data.label}}</li>
                     {%for data in data.menu%}
-                        <li class="{{data.class}} {%if data.submenu is not empty%} treeview {%endif%}">
+                        <li class="{{data.class}} {%if data.title == menu%} active {%endif%} {%if data.submenu is not empty%} treeview {%endif%}">
                             <a href="{{data.link}}">
                                 <i class="fa {{data.icon}}"></i> <span>{{data.title}}</span>
                                 {%if data.submenu is not empty%}
@@ -40,7 +40,7 @@
                             {%if data.submenu is not empty%}
                             <ul class="treeview-menu">
                                 {%for data in data.submenu%}
-                                    <li class="{{data.class}}"><a href="{{data.link}}"><i class="fa fa-circle-o"></i> {{data.title}}</a></li>
+                                    <li class="{{data.class}} {%if data.title == submenu%} active {%endif%}"><a href="{{data.link}}"><i class="fa fa-circle-o"></i> {{data.title}}</a></li>
                                 {%endfor%}
                             </ul>
                             {%endif%}

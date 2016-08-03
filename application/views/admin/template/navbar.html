@@ -8,15 +8,101 @@
         <ul class="nav navbar-nav">
             <!-- Messages: style can be found in dropdown.less-->
             {% if navbarMessages['totalAllData'] is not empty and navbarMessages['showData'] is not empty %}
-                {% include "template/navbar-messages-menu.html" %}
+                <li class="dropdown messages-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="label label-success">{{navbarMessages['totalAllData']}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">You have {{navbarMessages['totalAllData']}} messages</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                {%for data in navbarMessages['showData']%}
+                                <!-- start message -->
+                                <li>
+                                    <a href="#">
+                                        <div class="pull-left">
+                                            <img src="{{ img~data.photo }}" class="img-circle" alt="User Image">
+                                        </div>
+                                        <h4>
+                                            {{data.from}}
+                                            <small>
+                                                <i class="fa fa-clock-o"></i> {{data.time}}
+                                            </small>
+                                        </h4>
+                                        <p>{{data.msg}}</p>
+                                    </a>
+                                </li>
+                                <!-- end message -->
+                                {%endfor%}
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">See All Messages</a></li>
+                    </ul>
+                </li>
             {% endif %}
             <!-- Notifications: style can be found in dropdown.less -->
             {% if navbarNotifications['totalAllData'] is not empty and navbarNotifications['showData'] is not empty%}
-                {% include "template/navbar-notifications-menu.html" %}
+                <li class="dropdown notifications-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span class="label label-warning">{{navbarNotifications['totalAllData']}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">You have {{navbarNotifications['totalAllData']}} notifications</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                {%for data in navbarNotifications['showData']%}
+                                <li>
+                                    <a href="#">
+                                        <i class="{{data.icon}}"></i> {{data.task}}
+                                    </a>
+                                </li>
+                                {%endfor%}
+                            </ul>
+                        </li>
+                        <li class="footer"><a href="#">View all</a></li>
+                    </ul>
+                </li>
             {% endif %}
             <!-- Tasks: style can be found in dropdown.less -->
             {% if navbarTasks['totalAllData'] is not empty and navbarTasks['showData'] is not empty%}
-                {% include "template/navbar-tasks-menu.html" %}
+                <li class="dropdown tasks-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-flag-o"></i>
+                        <span class="label label-danger">{{navbarTasks['totalAllData']}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="header">You have {{navbarTasks['totalAllData']}} tasks</li>
+                        <li>
+                            <!-- inner menu: contains the actual data -->
+                            <ul class="menu">
+                                {%for data in navbarTasks['showData']%}
+                                <!-- Task item -->
+                                <li>
+                                    <a href="#">
+                                        <h3>
+                                            {{data.task}}
+                                            <small class="pull-right">{{data.progress}}%</small>
+                                        </h3>
+                                        <div class="progress xs">
+                                            <div class="progress-bar progress-bar-aqua" style="width: {{data.progress}}%" role="progressbar" aria-valuenow="{{data.progress}}" aria-valuemin="0" aria-valuemax="100">
+                                                <span class="sr-only">{{data.progress}}% Complete</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <!-- end task item -->
+                                {%endfor%}
+                            </ul>
+                        </li>
+                        <li class="footer">
+                            <a href="#">View all tasks</a>
+                        </li>
+                    </ul>
+                </li>
             {% endif %}
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">

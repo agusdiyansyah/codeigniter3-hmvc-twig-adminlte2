@@ -5,22 +5,59 @@
  */
 class Markas extends MX_Controller
 {
-    public $templateExtention = ".html";
+    private $paths;
 
     function __construct()
     {
         parent::__construct();
     }
 
-    public function template ($paths = "admin") {
-        // $paths = "modules/" . get_class($this) . "/views/" . $paths;
-        $paths = ["paths" => [APPPATH . "views/$paths", VIEWPATH]];
+    /**
+     * get base template
+     * @param  string $get get admin or public template
+     * @return object      markas
+     */
+    public function template ($get = "admin") {
+
+        $paths = array("paths" => array(APPPATH . "views/$get", VIEWPATH));
         $this->load->library("Twig", $paths);
         $this->twig->base = base_url();
+
+        if ($get == "admin") {
+            $this->twig->cache = false;
+            $this->admin();
+        }
+
+        return $this;
+    }
+
+    /**
+     * This function for prepend path to twig render path
+     * @param string $namespace  namespace for twig dir path
+     * @param string $customPath any path
+     */
+    public function addPath ($namespace = "", $customPath = "") {
+        if (empty($customPath)) {
+            $paths = APPPATH . "modules/" . get_class($this) . "/views/";
+        } else {
+            $paths = $customPath;
+        }
+        if (empty($namespace)) {
+            $this->twig->addPath($paths);
+        } else {
+            $this->twig->addPath($paths, $namespace);
+        }
+        return $this;
+    }
+
+
+    // template data
+    private function admin () {
         $this->twig->defaultParams = $this->navbarMessages() + $this->navbarNotifications() + $this->navbarTasks() + $this->userData() + $this->sidebarLeft();
     }
 
     private function navbarMessages () {
+        // load messages model
         return array(
             "navbarMessages" => array(
                 "totalAllData" => 10,
@@ -36,6 +73,7 @@ class Markas extends MX_Controller
     }
 
     private function navbarNotifications () {
+        // load notifications model
         return array(
             "navbarNotifications" => array(
                 "totalAllData" => 20,
@@ -51,6 +89,7 @@ class Markas extends MX_Controller
     }
 
     private function navbarTasks () {
+        // load tasks model
         return array(
             "navbarTasks" => array(
                 "totalAllData" => 15,
@@ -65,6 +104,7 @@ class Markas extends MX_Controller
     }
 
     private function userData () {
+        // load userdata model
         return array(
             "username" => "Agus Diyansyah",
             "photo" => "user2-160x160.jpg",
@@ -73,12 +113,13 @@ class Markas extends MX_Controller
     }
 
     private function sidebarLeft () {
+        // set static menu or dynamic menu from model
         return array(
             "dataMenu" => array(
                 array(
                     "label" => "PENGURUS BARANG",
                     "menu" => array(
-                        array("class" => "active", "icon" => "fa-home", "title" => "Dashboard", "link" => "#"),
+                        array("icon" => "fa-home", "title" => "Dashboard", "link" => "#"),
                         array(
                             "icon" => "fa-users", "title" => "User", "link" => "#",
                             "submenu" => array(

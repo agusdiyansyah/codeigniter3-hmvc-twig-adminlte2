@@ -19,15 +19,15 @@ class Twig
 	private $config = [];
 
 	public $base = "";
+	public $extention = ".html";
+	public $debug = false;
+	public $cache = true;
 
 	public $defaultParams = array();
+	public $params = array();
 
-	private $functions_asis = [
-		'base_url', 'site_url'
-	];
-	private $functions_safe = [
-		'form_open', 'form_close', 'form_error', 'set_value', 'form_hidden'
-	];
+	private $functions_asis = array('base_url', 'site_url');
+	private $functions_safe = array('form_open', 'form_close', 'form_error', 'set_value', 'form_hidden');
 
 	/**
 	 * @var bool Whether functions are added or not
@@ -47,27 +47,32 @@ class Twig
 	public function __construct($params = [])
 	{
 		// default config
-		$this->config = [
+		$this->config = array(
 			'paths' => [VIEWPATH],
 			'cache' => APPPATH . 'cache/twig',
-		];
+		);
 
 		$this->config = array_merge($this->config, $params);
 
 		if (isset($params['functions']))
 		{
-			$this->functions_asis =
-				array_unique(
-					array_merge($this->functions_asis, $params['functions'])
-				);
+			$this->functions_asis = array_unique(
+				array_merge($this->functions_asis, $params['functions'])
+			);
 		}
 		if (isset($params['functions_safe']))
 		{
-			$this->functions_safe =
-				array_unique(
-					array_merge($this->functions_safe, $params['functions_safe'])
-				);
+			$this->functions_safe = array_unique(
+				array_merge($this->functions_safe, $params['functions_safe'])
+			);
 		}
+	}
+
+	public function cache ($bol = false) {
+		if ($bol) {
+			$this->cache = true;
+		}
+		return $this;
 	}
 
 	protected function resetTwig()
@@ -84,28 +89,34 @@ class Twig
 			return;
 		}
 
-		if (ENVIRONMENT === 'production')
-		{
-			$debug = FALSE;
-		}
-		else
-		{
-			$debug = TRUE;
-		}
+		// if (ENVIRONMENT === 'production')
+		// {
+		// 	$debug = FALSE;
+		// }
+		// else
+		// {
+		// 	$debug = TRUE;
+		// }
 
 		if ($this->loader === null)
 		{
 			$this->loader = new \Twig_Loader_Filesystem($this->config['paths']);
 		}
 
-		$twig = new \Twig_Environment($this->loader, [
-			'cache'      => $this->config['cache'],
-			'debug'      => $debug,
+		$config = array(
+			'debug'      => $this->debug,
 			'autoescape' => TRUE,
-		]);
+			'auto_reload' => TRUE,
+		);
+
+		if ($this->cache) {
+			$config += array("cache" => $this->config['cache']);
+		}
+
+		$twig = new \Twig_Environment($this->loader, $config);
 
 
-		if ($debug)
+		if ($this->debug)
 		{
 			$twig->addExtension(new \Twig_Extension_Debug());
 		}
@@ -113,9 +124,26 @@ class Twig
 		$this->twig = $twig;
 	}
 
+	public function addPath ($path = "", $namespace = "") {
+		if ($this->loader === null)
+		{
+			$this->loader = new \Twig_Loader_Filesystem($this->config['paths']);
+		}
+		if (!empty($path)) {
+			if (empty($namespace)) {
+				$this->loader->prependPath($path);
+			} else {
+				$this->loader->prependPath($path, $namespace);
+			}
+
+		}
+		return $this;
+	}
+
 	protected function setLoader($loader)
 	{
 		$this->loader = $loader;
+		return $this;
 	}
 
 	/**
@@ -173,10 +201,15 @@ class Twig
 		$var = array (
 			"BASE" => $this->base
 		);
-		$data = $var + $params + $this->defaultParams;
-		echo $this->twig->render($view, $data);
+		$data = $var + $this->params + $this->defaultParams + $params;
+		echo $this->twig->render($view.$this->extention, $data);
 		return true;
 		// return $this->twig->render($view, $params);
+	}
+
+	private function params ($params) {
+		$this->params = $params;
+		return $this;
 	}
 
 	protected function addFunctions()
