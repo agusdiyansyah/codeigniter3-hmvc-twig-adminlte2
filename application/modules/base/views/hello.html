@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <h1>Hello my name is {{name | upper}} i'm {{age}} years old.</h1>
+        {% for data in users %}
+            {{data.name}} is {{data.age}} years old. <br>
+        {% endfor %}
+        {{"2016-12-01" | date_modify("+1 year +1 day +1 month") | date("j F Y")}}
+    </body>
+</html>

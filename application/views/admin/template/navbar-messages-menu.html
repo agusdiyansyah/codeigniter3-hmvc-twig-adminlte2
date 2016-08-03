@@ -1,0 +1,33 @@
+<li class="dropdown messages-menu">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-envelope-o"></i>
+        <span class="label label-success">{{navbarMessages['totalAllData']}}</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">You have {{navbarMessages['totalAllData']}} messages</li>
+        <li>
+            <!-- inner menu: contains the actual data -->
+            <ul class="menu">
+                {%for data in navbarMessages['showData']%}
+                <!-- start message -->
+                <li>
+                    <a href="#">
+                        <div class="pull-left">
+                            <img src="{{ img~data.photo }}" class="img-circle" alt="User Image">
+                        </div>
+                        <h4>
+                            {{data.from}}
+                            <small>
+                                <i class="fa fa-clock-o"></i> {{data.time}}
+                            </small>
+                        </h4>
+                        <p>{{data.msg}}</p>
+                    </a>
+                </li>
+                <!-- end message -->
+                {%endfor%}
+            </ul>
+        </li>
+        <li class="footer"><a href="#">See All Messages</a></li>
+    </ul>
+</li>
