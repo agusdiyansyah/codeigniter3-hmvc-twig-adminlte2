@@ -16,7 +16,7 @@ class __TwigTemplate_0595b8e8265ec0454933aefc59bf6443ae4fe0a693245036b4393811e7e
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
-        echo "<nav class=\"navbar navbar-fixed-top\">
+        echo "<nav class=\"navbar navbar-static-top\">
     <!-- Sidebar toggle button-->
     <a href=\"#\" class=\"sidebar-toggle\" data-toggle=\"offcanvas\" role=\"button\">
         <span class=\"sr-only\">Toggle navigation</span>
@@ -62,21 +62,30 @@ class __TwigTemplate_0595b8e8265ec0454933aefc59bf6443ae4fe0a693245036b4393811e7e
                 <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">
                     <img src=\"";
         // line 24
-        echo twig_escape_filter($this->env, (isset($context["img"]) ? $context["img"] : null), "html", null, true);
-        echo "user2-160x160.jpg\" class=\"user-image\" alt=\"User Image\">
-                    <span class=\"hidden-xs\">Alexander Pierce</span>
+        echo twig_escape_filter($this->env, ((isset($context["img"]) ? $context["img"] : null) . (isset($context["photo"]) ? $context["photo"] : null)), "html", null, true);
+        echo "\" class=\"user-image\" alt=\"User Image\">
+                    <span class=\"hidden-xs\">";
+        // line 25
+        echo twig_escape_filter($this->env, (isset($context["username"]) ? $context["username"] : null), "html", null, true);
+        echo "</span>
                 </a>
                 <ul class=\"dropdown-menu\">
                     <!-- User image -->
                     <li class=\"user-header\">
                         <img src=\"";
         // line 30
-        echo twig_escape_filter($this->env, (isset($context["img"]) ? $context["img"] : null), "html", null, true);
-        echo "user2-160x160.jpg\" class=\"img-circle\" alt=\"User Image\">
+        echo twig_escape_filter($this->env, ((isset($context["img"]) ? $context["img"] : null) . (isset($context["photo"]) ? $context["photo"] : null)), "html", null, true);
+        echo "\" class=\"img-circle\" alt=\"User Image\">
 
                         <p>
-                            Alexander Pierce - Web Developer
-                            <small>Member since Nov. 2012</small>
+                            ";
+        // line 33
+        echo twig_escape_filter($this->env, (isset($context["username"]) ? $context["username"] : null), "html", null, true);
+        echo "
+                            <small>";
+        // line 34
+        echo twig_escape_filter($this->env, (isset($context["level"]) ? $context["level"] : null), "html", null, true);
+        echo "</small>
                         </p>
                     </li>
                     <!-- Menu Body -->
@@ -127,10 +136,10 @@ class __TwigTemplate_0595b8e8265ec0454933aefc59bf6443ae4fe0a693245036b4393811e7e
 
     public function getDebugInfo()
     {
-        return array (  74 => 30,  65 => 24,  60 => 21,  57 => 20,  54 => 19,  52 => 18,  49 => 17,  46 => 16,  43 => 15,  41 => 14,  38 => 13,  35 => 12,  32 => 11,  30 => 10,  19 => 1,);
+        return array (  87 => 34,  83 => 33,  77 => 30,  69 => 25,  65 => 24,  60 => 21,  57 => 20,  54 => 19,  52 => 18,  49 => 17,  46 => 16,  43 => 15,  41 => 14,  38 => 13,  35 => 12,  32 => 11,  30 => 10,  19 => 1,);
     }
 }
-/* <nav class="navbar navbar-fixed-top">*/
+/* <nav class="navbar navbar-static-top">*/
 /*     <!-- Sidebar toggle button-->*/
 /*     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">*/
 /*         <span class="sr-only">Toggle navigation</span>*/
@@ -153,17 +162,17 @@ class __TwigTemplate_0595b8e8265ec0454933aefc59bf6443ae4fe0a693245036b4393811e7e
 /*             <!-- User Account: style can be found in dropdown.less -->*/
 /*             <li class="dropdown user user-menu">*/
 /*                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">*/
-/*                     <img src="{{ img }}user2-160x160.jpg" class="user-image" alt="User Image">*/
-/*                     <span class="hidden-xs">Alexander Pierce</span>*/
+/*                     <img src="{{ img~photo }}" class="user-image" alt="User Image">*/
+/*                     <span class="hidden-xs">{{ username }}</span>*/
 /*                 </a>*/
 /*                 <ul class="dropdown-menu">*/
 /*                     <!-- User image -->*/
 /*                     <li class="user-header">*/
-/*                         <img src="{{ img }}user2-160x160.jpg" class="img-circle" alt="User Image">*/
+/*                         <img src="{{ img~photo }}" class="img-circle" alt="User Image">*/
 /* */
 /*                         <p>*/
-/*                             Alexander Pierce - Web Developer*/
-/*                             <small>Member since Nov. 2012</small>*/
+/*                             {{ username }}*/
+/*                             <small>{{ level }}</small>*/
 /*                         </p>*/
 /*                     </li>*/
 /*                     <!-- Menu Body -->*/

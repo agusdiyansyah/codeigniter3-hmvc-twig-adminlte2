@@ -17,7 +17,7 @@ class Markas extends MX_Controller
         $paths = ["paths" => [APPPATH . "views/$paths", VIEWPATH]];
         $this->load->library("Twig", $paths);
         $this->twig->base = base_url();
-        $this->twig->defaultParams = $this->navbarMessages() + $this->navbarNotifications();
+        $this->twig->defaultParams = $this->navbarMessages() + $this->navbarNotifications() + $this->navbarTasks() + $this->userData() + $this->sidebarLeft();
     }
 
     private function navbarMessages () {
@@ -45,6 +45,56 @@ class Markas extends MX_Controller
                     array("icon" => "fa fa-users text-red", "task" => "5 new members joined"),
                     array("icon" => "fa fa-shopping-cart text-green", "task" => "25 sales made"),
                     array("icon" => "fa fa-user text-red", "task" => "You changed your username")
+                )
+            )
+        );
+    }
+
+    private function navbarTasks () {
+        return array(
+            "navbarTasks" => array(
+                "totalAllData" => 15,
+                "showData" => array(
+                    array("task" => "Create some button", "progress" => "20"),
+                    array("task" => "Create a nice theme", "progress" => "30"),
+                    array("task" => "Some task I need to do", "progress" => "25"),
+                    array("task" => "Make beautiful transitions", "progress" => "80")
+                )
+            )
+        );
+    }
+
+    private function userData () {
+        return array(
+            "username" => "Agus Diyansyah",
+            "photo" => "user2-160x160.jpg",
+            "level" => "Admin"
+        );
+    }
+
+    private function sidebarLeft () {
+        return array(
+            "dataMenu" => array(
+                array(
+                    "label" => "PENGURUS BARANG",
+                    "menu" => array(
+                        array("class" => "active", "icon" => "fa-home", "title" => "Dashboard", "link" => "#"),
+                        array(
+                            "icon" => "fa-users", "title" => "User", "link" => "#",
+                            "submenu" => array(
+                                array("title" => "Data", "link" => "#"),
+                                array("title" => "Tambah", "link" => "#"),
+                            )
+                        ),
+                    )
+                ),
+                array(
+                    "label" => "PENYIMPAN BARANG",
+                    "menu" => array(
+                        array("icon" => "fa-save", "title" => "Barang", "link" => "#"),
+                        array("icon" => "fa-download", "title" => "Penerimaan", "link" => "#"),
+                        array("icon" => "fa-upload", "title" => "Pengeluaran", "link" => "#"),
+                    )
                 )
             )
         );

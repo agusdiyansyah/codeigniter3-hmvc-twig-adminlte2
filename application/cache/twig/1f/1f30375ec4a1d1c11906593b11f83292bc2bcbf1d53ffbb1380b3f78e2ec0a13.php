@@ -10,10 +10,7 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
         $this->parent = false;
 
         $this->blocks = array(
-            'webtitle' => array($this, 'block_webtitle'),
             'css' => array($this, 'block_css'),
-            'pagetitle' => array($this, 'block_pagetitle'),
-            'pagesubtitle' => array($this, 'block_pagesubtitle'),
             'content' => array($this, 'block_content'),
             'js' => array($this, 'block_js'),
         );
@@ -36,37 +33,39 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
     <head>
         <meta charset=\"utf-8\">
         <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-        <title>
-            ";
-        // line 12
-        $this->displayBlock('webtitle', $context, $blocks);
-        // line 13
-        echo "        </title>
+        <title>";
+        // line 11
+        echo twig_escape_filter($this->env, (isset($context["title"]) ? $context["title"] : null), "html", null, true);
+        echo "</title>
 
         <!-- Meta -->
         <meta content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\" name=\"viewport\">
 
         <!-- Css Autoload -->
         <link rel=\"stylesheet\" href=\"";
-        // line 19
+        // line 17
         echo twig_escape_filter($this->env, (isset($context["vendor"]) ? $context["vendor"] : null), "html", null, true);
         echo "bootstrap/css/bootstrap.min.css\">
         <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css\">
         <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css\">
 
         <link rel=\"stylesheet\" href=\"";
-        // line 23
+        // line 21
         echo twig_escape_filter($this->env, (isset($context["css"]) ? $context["css"] : null), "html", null, true);
         echo "skins/_all-skins.min.css\">
         <link rel=\"stylesheet\" href=\"";
-        // line 24
+        // line 22
         echo twig_escape_filter($this->env, (isset($context["css"]) ? $context["css"] : null), "html", null, true);
         echo "AdminLTE.min.css\">
+        <link rel=\"stylesheet\" href=\"";
+        // line 23
+        echo twig_escape_filter($this->env, (isset($context["css"]) ? $context["css"] : null), "html", null, true);
+        echo "master.css\">
 
         ";
-        // line 26
+        // line 25
         $this->displayBlock('css', $context, $blocks);
-        // line 28
+        // line 27
         echo "    </head>
     <body class=\"hold-transition skin-blue sidebar-mini\">
 
@@ -84,15 +83,15 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
 
                 <!-- Header Navbar: style can be found in header.less -->
                 ";
+        // line 43
+        $this->loadTemplate("template/navbar.html", "template/master.html", 43)->display($context);
         // line 44
-        $this->loadTemplate("template/navbar.html", "template/master.html", 44)->display($context);
-        // line 45
         echo "            </header>
             <!-- Left side column. contains the logo and sidebar -->
             ";
+        // line 46
+        $this->loadTemplate("template/sidebar-left.html", "template/master.html", 46)->display($context);
         // line 47
-        $this->loadTemplate("template/sidebar.html", "template/master.html", 47)->display($context);
-        // line 48
         echo "
             <!-- Content Wrapper. Contains page content -->
             <div class=\"content-wrapper\">
@@ -100,11 +99,12 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
                 <section class=\"content-header\">
                     <h1>
                         ";
+        // line 53
+        echo twig_escape_filter($this->env, (isset($context["page"]) ? $context["page"] : null), "html", null, true);
+        echo "
+                        <small>";
         // line 54
-        $this->displayBlock('pagetitle', $context, $blocks);
-        // line 55
-        echo "                        <small>";
-        $this->displayBlock('pagesubtitle', $context, $blocks);
+        echo twig_escape_filter($this->env, (isset($context["subpage"]) ? $context["subpage"] : null), "html", null, true);
         echo "</small>
                     </h1>
                     <!-- <ol class=\"breadcrumb\">
@@ -116,9 +116,9 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
                 <!-- Main content -->
                 <section class=\"content\">
                     ";
-        // line 65
+        // line 64
         $this->displayBlock('content', $context, $blocks);
-        // line 67
+        // line 66
         echo "                </section>
                 <!-- /.content -->
             </div>
@@ -134,9 +134,9 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
 
             <!-- Control Sidebar -->
             ";
+        // line 80
+        $this->loadTemplate("template/sidebar-right.html", "template/master.html", 80)->display($context);
         // line 81
-        $this->loadTemplate("template/sidebar-right.html", "template/master.html", 81)->display($context);
-        // line 82
         echo "            <!-- /.control-sidebar -->
             <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
@@ -147,87 +147,58 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
 
        <!-- jQuery 2.2.3 -->
        <script src=\"";
-        // line 91
+        // line 90
         echo twig_escape_filter($this->env, (isset($context["vendor"]) ? $context["vendor"] : null), "html", null, true);
         echo "jQuery/jquery-2.2.3.min.js\"></script>
        <!-- Bootstrap 3.3.6 -->
        <script src=\"";
-        // line 93
+        // line 92
         echo twig_escape_filter($this->env, (isset($context["vendor"]) ? $context["vendor"] : null), "html", null, true);
         echo "bootstrap/js/bootstrap.min.js\"></script>
        <!-- FastClick -->
        <script src=\"";
-        // line 95
+        // line 94
         echo twig_escape_filter($this->env, (isset($context["vendor"]) ? $context["vendor"] : null), "html", null, true);
         echo "fastclick/fastclick.js\"></script>
        <!-- AdminLTE App -->
        <script src=\"";
-        // line 97
+        // line 96
         echo twig_escape_filter($this->env, (isset($context["js"]) ? $context["js"] : null), "html", null, true);
         echo "app.min.js\"></script>
 
        <!-- SlimScroll 1.3.0 -->
        <script src=\"";
-        // line 100
+        // line 99
         echo twig_escape_filter($this->env, (isset($context["vendor"]) ? $context["vendor"] : null), "html", null, true);
         echo "slimScroll/jquery.slimscroll.min.js\"></script>
-
-       <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-       <script src=\"";
-        // line 103
-        echo twig_escape_filter($this->env, (isset($context["js"]) ? $context["js"] : null), "html", null, true);
-        echo "pages/dashboard2.js\"></script>
-       <!-- AdminLTE for demo purposes -->
-       <script src=\"";
-        // line 105
-        echo twig_escape_filter($this->env, (isset($context["js"]) ? $context["js"] : null), "html", null, true);
-        echo "demo.js\"></script>
        ";
-        // line 106
+        // line 100
         $this->displayBlock('js', $context, $blocks);
-        // line 108
+        // line 102
         echo "   </body>
 
 </html>
 ";
     }
 
-    // line 12
-    public function block_webtitle($context, array $blocks = array())
-    {
-        echo " agus diyansyah ";
-    }
-
-    // line 26
+    // line 25
     public function block_css($context, array $blocks = array())
     {
-        // line 27
+        // line 26
         echo "        ";
     }
 
-    // line 54
-    public function block_pagetitle($context, array $blocks = array())
-    {
-        echo " ";
-    }
-
-    // line 55
-    public function block_pagesubtitle($context, array $blocks = array())
-    {
-        echo " ";
-    }
-
-    // line 65
+    // line 64
     public function block_content($context, array $blocks = array())
     {
-        // line 66
+        // line 65
         echo "                    ";
     }
 
-    // line 106
+    // line 100
     public function block_js($context, array $blocks = array())
     {
-        // line 107
+        // line 101
         echo "       ";
     }
 
@@ -243,7 +214,7 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
 
     public function getDebugInfo()
     {
-        return array (  231 => 107,  228 => 106,  224 => 66,  221 => 65,  215 => 55,  209 => 54,  205 => 27,  202 => 26,  196 => 12,  189 => 108,  187 => 106,  183 => 105,  178 => 103,  172 => 100,  166 => 97,  161 => 95,  156 => 93,  151 => 91,  140 => 82,  138 => 81,  122 => 67,  120 => 65,  106 => 55,  104 => 54,  96 => 48,  94 => 47,  90 => 45,  88 => 44,  70 => 28,  68 => 26,  63 => 24,  59 => 23,  52 => 19,  44 => 13,  42 => 12,  33 => 5,  31 => 4,  29 => 3,  27 => 2,  25 => 1,);
+        return array (  202 => 101,  199 => 100,  195 => 65,  192 => 64,  188 => 26,  185 => 25,  178 => 102,  176 => 100,  172 => 99,  166 => 96,  161 => 94,  156 => 92,  151 => 90,  140 => 81,  138 => 80,  122 => 66,  120 => 64,  107 => 54,  103 => 53,  95 => 47,  93 => 46,  89 => 44,  87 => 43,  69 => 27,  67 => 25,  62 => 23,  58 => 22,  54 => 21,  47 => 17,  38 => 11,  30 => 5,  28 => 4,  26 => 3,  24 => 2,  22 => 1,);
     }
 }
 /* {% set vendor = BASE~"gudang/vendor/" %}*/
@@ -256,9 +227,7 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
 /*     <head>*/
 /*         <meta charset="utf-8">*/
 /*         <meta http-equiv="X-UA-Compatible" content="IE=edge">*/
-/*         <title>*/
-/*             {% block webtitle %} agus diyansyah {% endblock %}*/
-/*         </title>*/
+/*         <title>{{title}}</title>*/
 /* */
 /*         <!-- Meta -->*/
 /*         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">*/
@@ -270,6 +239,7 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
 /* */
 /*         <link rel="stylesheet" href="{{ css }}skins/_all-skins.min.css">*/
 /*         <link rel="stylesheet" href="{{ css }}AdminLTE.min.css">*/
+/*         <link rel="stylesheet" href="{{ css }}master.css">*/
 /* */
 /*         {% block css %}*/
 /*         {% endblock %}*/
@@ -292,15 +262,15 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
 /*                 {% include "template/navbar.html" %}*/
 /*             </header>*/
 /*             <!-- Left side column. contains the logo and sidebar -->*/
-/*             {% include "template/sidebar.html" %}*/
+/*             {% include "template/sidebar-left.html" %}*/
 /* */
 /*             <!-- Content Wrapper. Contains page content -->*/
 /*             <div class="content-wrapper">*/
 /*                 <!-- Content Header (Page header) -->*/
 /*                 <section class="content-header">*/
 /*                     <h1>*/
-/*                         {% block pagetitle %} {% endblock %}*/
-/*                         <small>{% block pagesubtitle %} {% endblock %}</small>*/
+/*                         {{page}}*/
+/*                         <small>{{subpage}}</small>*/
 /*                     </h1>*/
 /*                     <!-- <ol class="breadcrumb">*/
 /*                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>*/
@@ -346,11 +316,6 @@ class __TwigTemplate_5c8022e8f1727f7423d210f5748d9cd917fcdb1594b9ee8260f9db09efc
 /* */
 /*        <!-- SlimScroll 1.3.0 -->*/
 /*        <script src="{{ vendor }}slimScroll/jquery.slimscroll.min.js"></script>*/
-/* */
-/*        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->*/
-/*        <script src="{{ js }}pages/dashboard2.js"></script>*/
-/*        <!-- AdminLTE for demo purposes -->*/
-/*        <script src="{{ js }}demo.js"></script>*/
 /*        {% block js %}*/
 /*        {% endblock %}*/
 /*    </body>*/
